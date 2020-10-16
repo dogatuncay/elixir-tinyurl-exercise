@@ -6,6 +6,8 @@ defmodule TinyUrl.Application do
   use Application
 
   def start(_type, _args) do
+    TinyUrl.Cache.CacheStore.init()
+
     children = [
       # Start the Ecto repository
       TinyUrl.Repo,

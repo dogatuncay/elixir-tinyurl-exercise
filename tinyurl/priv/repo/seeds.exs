@@ -9,3 +9,13 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias TinyUrl.Service
+alias TinyUrl.Links.ShortLink
+
+urls = ["http://www.facebook.com/", "http://www.google.com/", "http://www.amazon.com/"]
+
+Enum.each(urls, fn url ->
+  ShortLink.create_changeset(url)
+  |> TinyUrl.Repo.insert()
+end)

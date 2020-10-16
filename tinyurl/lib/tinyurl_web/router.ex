@@ -1,5 +1,6 @@
 defmodule TinyUrlWeb.Router do
   use TinyUrlWeb, :router
+  alias TinyUrlWeb.PageController
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,17 +14,17 @@ defmodule TinyUrlWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", TinyUrlWeb do
+  scope "/" do
     pipe_through :browser
 
     get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
-  scope "/api", TinyUrlWeb do
+  scope "/api" do
     pipe_through :api
 
-    # TODO: implement API route
+    resources "/page", PageController, only: [:create, :show]
   end
 
   # Enables LiveDashboard only for development
